@@ -1,0 +1,94 @@
+@use 'variable' as var;
+
+$height: 100px;
+$width: 400px;
+$main: 250px;
+$side: 150px;
+
+$blocksHeight: 40px;
+$blocksWidth: 40px;
+$mainBlocksWidth: 140px;
+$mainMargin: 40px;
+
+@each $className in var.$classNames {
+  $index_key : index(var.$classNames , $className );
+  $color : nth(var.$buttonColor, $index_key);
+    .#{$className} {
+    background-color: $color;
+    }
+}
+
+@mixin box() {
+  display: flex;
+  align-items: center;
+  height: auto;
+  width: fit-content;
+  background-color: var.$white;
+}
+
+@mixin blocks() {
+  height: $blocksHeight;
+}
+
+.header {
+  display: float;
+  align-items: center;
+  height: $height;
+  width: $width;
+  background-color: var.$navy;
+
+  &__box {
+    @include box();
+    float: right;
+    margin: 20px;
+
+    &__blocks {
+      @include blocks();
+      width: $blocksWidth;
+      margin: 10px 10px 10px 0;
+      &:first-child {
+        margin-left: 10px;
+      }
+    }
+  }
+}
+
+.content {
+  display: flex;
+}
+
+.sidebar {
+  height: $main;
+  width: $side;
+  background-color: var.$green;
+  
+}
+
+.main {
+  display:grid;
+  place-items: start;
+  height: $main;
+  width: $main;
+  background-color: var.$red;
+
+  &__box {
+    @include box();
+    float: left;
+    margin-left: $mainMargin;
+    &:first-child {
+      margin-top: $mainMargin;
+    }
+
+    &__blocks {
+      @include blocks();
+      width: $mainBlocksWidth;
+      margin: 5px;
+    }
+  }
+}
+
+.footer {
+  height: $height;
+  width: $width;
+  background-color: var.$brown;
+}
